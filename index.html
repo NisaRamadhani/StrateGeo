@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>StrateGeo WebGIS</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css" rel="stylesheet" />
+
+  <style>
+    body { margin: 0; font-family: sans-serif; }
+
+    #sidebar {
+      position: absolute;
+      width: 260px;
+      height: 100%;
+      background: #181D27;
+      color: white;
+      padding: 15px;
+      overflow-y: auto;
+    }
+
+    #map {
+      position: absolute;
+      left: 260px;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+
+    h2 { color: #69B578; }
+
+    label { display: block; margin: 5px 0; }
+
+  </style>
+</head>
+
+<body>
+
+<div id="sidebar">
+  <h2>StrateGeo</h2>
+
+  <h3>Basemap</h3>
+  <select id="basemap">
+    <option value="street">Street</option>
+    <option value="dark">Dark</option>
+    <option value="satellite">Satellite</option>
+  </select>
+
+  <h3>Layers</h3>
+  <label><input type="checkbox" id="admin"> Batas Administrasi</label>
+  <label><input type="checkbox" id="road"> Jalan</label>
+  <label><input type="checkbox" id="demand" checked> Supermarket</label>
+  <label><input type="checkbox" id="warehouse" checked> Warehouse</label>
+
+</div>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
