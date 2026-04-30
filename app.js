@@ -1,7 +1,7 @@
 // ======================
 // API KEY
 // ======================
-const API_KEY = "PASTE_API_KEY_KAMU";
+const API_KEY = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjExNzhmMmJjMDBiOTQ1MDc5YTU3NzhjYjRiMzNjY2VkIiwiaCI6Im11cm11cjY0In0=";
 
 // ======================
 // BASEMAP
