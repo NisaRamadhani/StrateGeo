@@ -1,7 +1,7 @@
 // ======================
 // API KEY
 // ======================
-const API_KEY = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjExNzhmMmJjMDBiOTQ1MDc5YTU3NzhjYjRiMzNjY2VkIiwiaCI6Im11cm11cjY0In0=";
+const API_KEY = "PASTE_API_KEY_KAMU";
 
 // ======================
 // BASEMAP
@@ -11,7 +11,7 @@ const basemapDark = 'https://basemap.mapid.io/styles/dark/style.json?key=69a8ede
 const basemapSatellite = 'https://basemap.mapid.io/styles/satellite/style.json?key=69a8edeffdb1d3dbc8b3022c';
 
 // ======================
-// INIT MAP
+// MAP INIT
 // ======================
 const map = new maplibregl.Map({
   container: 'map',
@@ -27,11 +27,7 @@ let selectedPoint = null;
 // ======================
 function loadLayers() {
 
-  map.addSource('admin', {
-    type: 'geojson',
-    data: 'data/administrasi.geojson'
-  });
-
+  map.addSource('admin', { type: 'geojson', data: 'data/administrasi.geojson' });
   map.addLayer({
     id: 'admin-layer',
     type: 'line',
@@ -39,11 +35,7 @@ function loadLayers() {
     paint: { 'line-color': '#3A7D44', 'line-width': 2 }
   });
 
-  map.addSource('road', {
-    type: 'geojson',
-    data: 'data/jalan.geojson'
-  });
-
+  map.addSource('road', { type: 'geojson', data: 'data/jalan.geojson' });
   map.addLayer({
     id: 'road-layer',
     type: 'line',
@@ -51,11 +43,7 @@ function loadLayers() {
     paint: { 'line-color': '#181D27', 'line-width': 1 }
   });
 
-  map.addSource('demand', {
-    type: 'geojson',
-    data: 'data/demand.geojson'
-  });
-
+  map.addSource('demand', { type: 'geojson', data: 'data/demand.geojson' });
   map.addLayer({
     id: 'demand-layer',
     type: 'circle',
@@ -63,11 +51,7 @@ function loadLayers() {
     paint: { 'circle-radius': 6, 'circle-color': '#69B578' }
   });
 
-  map.addSource('warehouse', {
-    type: 'geojson',
-    data: 'data/warehouse.geojson'
-  });
-
+  map.addSource('warehouse', { type: 'geojson', data: 'data/warehouse.geojson' });
   map.addLayer({
     id: 'warehouse-layer',
     type: 'circle',
@@ -83,7 +67,6 @@ function loadLayers() {
 // TOGGLE
 // ======================
 function setupToggle() {
-
   const toggle = (layer, id) => {
     document.getElementById(id).onchange = e => {
       if (map.getLayer(layer)) {
@@ -135,7 +118,11 @@ function runBuffer() {
 
   const radius = parseFloat(document.getElementById("bufferRadius").value);
 
-  const buffer = turf.buffer(turf.point(selectedPoint), radius, { units: 'kilometers' });
+  const buffer = turf.buffer(
+    turf.point(selectedPoint),
+    radius,
+    { units: 'kilometers' }
+  );
 
   if (map.getSource('buffer')) {
     map.getSource('buffer').setData(buffer);
@@ -209,6 +196,87 @@ function clearIsochrone() {
 }
 
 // ======================
+// COVERAGE (FIXED TOTAL)
+// ======================
+function runCoverage() {
+
+  const radius = parseFloat(document.getElementById("coverageRadius").value);
+
+  Promise.all([
+    fetch('data/demand.geojson').then(res => res.json()),
+    fetch('data/administrasi.geojson').then(res => res.json())
+  ])
+  .then(([demandData, adminData]) => {
+
+    const buffers = demandData.features.map(f =>
+      turf.buffer(f, radius, { units: 'kilometers' })
+    );
+
+    let merged = buffers[0];
+
+    for (let i = 1; i < buffers.length; i++) {
+      try {
+        merged = turf.union(merged, buffers[i]);
+      } catch {
+        console.log("union skip");
+      }
+    }
+
+    // coverage (hijau)
+    if (map.getSource('coverage')) {
+      map.getSource('coverage').setData(merged);
+    } else {
+      map.addSource('coverage', { type: 'geojson', data: merged });
+
+      map.addLayer({
+        id: 'coverage-layer',
+        type: 'fill',
+        source: 'coverage',
+        paint: {
+          'fill-color': '#00FF88',
+          'fill-opacity': 0.3
+        }
+      });
+    }
+
+    // gap (merah)
+    try {
+      const uncovered = turf.difference(adminData, merged);
+
+      if (uncovered) {
+        if (map.getSource('gap')) {
+          map.getSource('gap').setData(uncovered);
+        } else {
+          map.addSource('gap', { type: 'geojson', data: uncovered });
+
+          map.addLayer({
+            id: 'gap-layer',
+            type: 'fill',
+            source: 'gap',
+            paint: {
+              'fill-color': '#FF3B3B',
+              'fill-opacity': 0.4
+            }
+          });
+        }
+      }
+    } catch {
+      console.log("gap gagal");
+    }
+
+  })
+  .catch(() => alert("Coverage error"));
+}
+
+function clearCoverage() {
+  if (map.getLayer('coverage-layer')) map.removeLayer('coverage-layer');
+  if (map.getSource('coverage')) map.removeSource('coverage');
+
+  if (map.getLayer('gap-layer')) map.removeLayer('gap-layer');
+  if (map.getSource('gap')) map.removeSource('gap');
+}
+
+// ======================
 // INIT
 // ======================
 map.on('load', loadLayers);
@@ -224,6 +292,5 @@ document.getElementById("basemap").onchange = function () {
     basemapSatellite;
 
   map.setStyle(style);
-
   map.once('style.load', loadLayers);
 };
