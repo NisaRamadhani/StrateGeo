@@ -1,0 +1,929 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lotte Mart",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.895625924,
+          -6.153660624
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Transmart Carrefour Cempaka Putih",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.87639078421053,
+          -6.168776910526316
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Super Indo",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.88309097777778,
+          -6.22733
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Naga Swalayan Ciracas",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.86769052,
+          -6.33118599
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Gelael",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.86578395555556,
+          -6.328181511111111
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Giant Ekspress",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.92685165714285,
+          -6.247521857142858
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Carrefour",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.86152581052632,
+          -6.2445192315789475
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Carrefour",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.84414014285714,
+          -6.267965214285716
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Farmers Family",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.94321253999999,
+          -6.22608796
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Grand Lucky",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.80578724761902,
+          -6.226874028571428
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Grand Lucky",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.79055122,
+          -6.25382785
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Fresh Market",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.92281524545456,
+          -6.226820654545454
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Indogrosir Kemayoran",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.84994581999999,
+          -6.15675586
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Naga Swalayan",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.9076098,
+          -6.24853506
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lotte Mart",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.733845,
+          -6.193593559999999
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lotte Mart",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.79697616000001,
+          -6.276636259999999
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Giant",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.81471093999998,
+          -6.3021244
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cahaya Swalayan",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.81424814666667,
+          -6.30563508
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Giant Ekspress",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.75458512,
+          -6.2189133199999995
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Hypermart",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.7397337263158,
+          -6.185591468421052
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ranch Market Sultan Iskandar Muda",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.78416044666668,
+          -6.262655140000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mu Gung Hwa",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.81593005999999,
+          -6.235422820000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Supermarket Santa",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.81222181999999,
+          -6.2390968
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Carrefour",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.87750356000001,
+          -6.137790860000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ranch Market Kemang",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.81561811333333,
+          -6.2640185666666675
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Papaya Fresh Gallery Menteng",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.82542781666668,
+          -6.185728650000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Giant",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.82604814285715,
+          -6.241872985714286
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Super Indo",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.82938478000001,
+          -6.260803800000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Super Indo",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.84304971818182,
+          -6.252985454545455
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Pasar Pagi Asemka",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.81184588181819,
+          -6.14012359090909
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Indogrosir",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.88294824444444,
+          -6.213000333333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ranch Market",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.75648260714284,
+          -6.1883167071428575
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tip Top Swalayan",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.88641055714285,
+          -6.200572042857144
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Carefour",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.7514585,
+          -6.1977990555555555
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Srengseng Junction",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.75908012,
+          -6.20917932
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Super Indo",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.8909934,
+          -6.1839765
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Courts Megastore Bekasi",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.97408336000001,
+          -6.185662720000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mitra Diskon Swalayan",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.77792976,
+          -6.299969959999999
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Pasar Gardu",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.89336433999999,
+          -6.29162452
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tip Top",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.90153467142856,
+          -6.243150528571429
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Super Indo",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.71089018571426,
+          -6.13225442142857
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lotte Mart",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.70426473999999,
+          -6.131436140000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Super Indo",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.70762405333332,
+          -6.142204520000002
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mini Super Jatinegara",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.8683748,
+          -6.2224743600000005
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Toko Daging Nusantara (Tanjung Duren)",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.78373394,
+          -6.18265764
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "HERO",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.79161913333333,
+          -6.282889466666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mitra 10 Kalideres",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.71443207142859,
+          -6.154392114285713
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Transmart Carrefour",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.93182921249999,
+          -6.2474246375
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Aneka Buana Pondok Labu Supermarket",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.7940442,
+          -6.30935796
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Alfamidi",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.74445924444446,
+          -6.2357060888888896
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Super Indo",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.72462691999999,
+          -6.16701348
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ibunda Grosir",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.87800058888887,
+          -6.317943166666668
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Toserba Yogya",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.90042170000001,
+          -6.23939802
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Super Indo",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.75755483999998,
+          -6.27138088
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Toko Sundari",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.78433863999999,
+          -6.17721824
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Toko Subur",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.78343316,
+          -6.176288000000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Carefour Express Kebayoran",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.77771614545455,
+          -6.238790581818182
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Carrefour",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.77588214,
+          -6.287618140000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "PIK Fresh Market",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.74151524000001,
+          -6.103109300000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Superindo",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.78337017999999,
+          -6.117263939999999
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Hari-Hari Swalayan",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.77529161999999,
+          -6.1382521400000005
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Superindo",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.78272345999999,
+          -6.13727364
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kemchick",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.74003413999999,
+          -6.09364619
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Gelael",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.84716146666665,
+          -6.242702066666666
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Alfamidi Super Gongseng",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.85356018571427,
+          -6.326823114285714
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Alfamidi",
+        "category": "supermarket"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.95475391428572,
+          -6.177701114285712
+        ]
+      }
+    }
+  ]
+}
