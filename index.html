@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <title>StrateGeo WebGIS</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css" rel="stylesheet" />
@@ -14,13 +13,12 @@
       font-family: 'Segoe UI', sans-serif;
     }
 
-    /* ======================
-       SIDEBAR
-    ====================== */
+    /* SIDEBAR */
     #sidebar {
       position: absolute;
-      width: 260px;
-      height: 100%;
+      width: 280px;
+      height: 100vh;
+      overflow-y: auto;
       background: linear-gradient(180deg, #181D27, #11151C);
       color: white;
       padding: 20px;
@@ -28,9 +26,10 @@
       z-index: 10;
     }
 
+    /* MAP */
     #map {
       position: absolute;
-      left: 260px;
+      left: 280px;
       right: 0;
       top: 0;
       bottom: 0;
@@ -39,60 +38,49 @@
     h2 {
       color: #69B578;
       margin-bottom: 25px;
-      font-size: 22px;
     }
 
     h3 {
       margin-top: 25px;
-      margin-bottom: 10px;
       font-size: 12px;
       color: #888;
       text-transform: uppercase;
-      letter-spacing: 1px;
     }
 
-    /* ======================
-       CARD
-    ====================== */
+    /* CARD */
     .card {
       background: rgba(255,255,255,0.05);
-      padding: 12px;
-      border-radius: 10px;
-      margin-bottom: 10px;
+      padding: 14px;
+      border-radius: 12px;
+      margin-bottom: 15px;
     }
 
-    /* ======================
-       LAYER ITEM
-    ====================== */
+    /* LAYER ITEM */
     .layer-item {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 6px 8px;
-      border-radius: 6px;
-      transition: 0.2s;
+      align-items: center;
+      padding: 6px 4px;
     }
 
-    .layer-item:hover {
-      background: rgba(255,255,255,0.08);
-    }
-
-    .layer-item span {
+    .layer-item label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       font-size: 14px;
     }
 
     input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
       accent-color: #69B578;
-      transform: scale(1.1);
     }
 
-    /* ======================
-       INPUT
-    ====================== */
-    select, input[type="number"] {
+    /* INPUT */
+    select, input {
       width: 100%;
       padding: 8px;
-      border-radius: 6px;
+      border-radius: 8px;
       border: none;
       margin-top: 5px;
       margin-bottom: 10px;
@@ -100,9 +88,7 @@
       color: white;
     }
 
-    /* ======================
-       BUTTON
-    ====================== */
+    /* BUTTON */
     button {
       width: 100%;
       padding: 10px;
@@ -110,7 +96,7 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
-      margin-top: 8px;
+      margin-top: 6px;
       transition: 0.2s;
     }
 
@@ -120,7 +106,7 @@
     }
 
     .btn-secondary {
-      background: #2c2c2c;
+      background: #333;
       color: white;
     }
 
@@ -132,9 +118,6 @@
 
 <body>
 
-<!-- ======================
-     SIDEBAR
-====================== -->
 <div id="sidebar">
 
   <h2>StrateGeo</h2>
@@ -154,23 +137,31 @@
   <div class="card">
 
     <div class="layer-item">
-      <span>Batas Administrasi</span>
-      <input type="checkbox" id="admin" checked>
+      <label>
+        <input type="checkbox" id="admin" checked>
+        Batas Administrasi
+      </label>
     </div>
 
     <div class="layer-item">
-      <span>Jalan</span>
-      <input type="checkbox" id="road" checked>
+      <label>
+        <input type="checkbox" id="road" checked>
+        Jalan
+      </label>
     </div>
 
     <div class="layer-item">
-      <span>Supermarket</span>
-      <input type="checkbox" id="demand" checked>
+      <label>
+        <input type="checkbox" id="demand" checked>
+        Supermarket
+      </label>
     </div>
 
     <div class="layer-item">
-      <span>Warehouse</span>
-      <input type="checkbox" id="warehouse" checked>
+      <label>
+        <input type="checkbox" id="warehouse" checked>
+        Warehouse
+      </label>
     </div>
 
   </div>
@@ -178,21 +169,37 @@
   <!-- BUFFER -->
   <h3>Buffer Analysis</h3>
   <div class="card">
-
     <label>Radius (km)</label>
-    <input type="number" id="bufferRadius" value="3" min="1" max="50">
+    <input type="number" id="bufferRadius" value="3">
 
     <button class="btn-primary" onclick="runBuffer()">Run Buffer</button>
     <button class="btn-secondary" onclick="clearBuffer()">Clear</button>
+  </div>
+
+  <!-- ISOCHRONE -->
+  <h3>Isochrone</h3>
+  <div class="card">
+
+    <label>Travel Time (minutes)</label>
+    <input type="number" id="isoTime" value="10">
+
+    <label>Transport Mode</label>
+    <select id="isoMode">
+      <option value="driving-car">Car</option>
+      <option value="driving-hgv">Truck</option>
+      <option value="cycling-regular">Bike</option>
+      <option value="foot-walking">Walking</option>
+    </select>
+
+    <button class="btn-primary" onclick="runIsochrone()">Run Isochrone</button>
+    <button class="btn-secondary" onclick="clearIsochrone()">Clear</button>
 
   </div>
 
 </div>
 
-<!-- MAP -->
 <div id="map"></div>
 
-<!-- SCRIPTS -->
 <script src="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js"></script>
 <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
 <script src="app.js"></script>
