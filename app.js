@@ -1,4 +1,9 @@
 // ======================
+// API KEY
+// ======================
+const API_KEY = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjExNzhmMmJjMDBiOTQ1MDc5YTU3NzhjYjRiMzNjY2VkIiwiaCI6Im11cm11cjY0In0=";
+
+// ======================
 // BASEMAP
 // ======================
 const basemapStreet = 'https://basemap.mapid.io/styles/street-2d-building/style.json?key=69a8edeffdb1d3dbc8b3022c';
@@ -18,11 +23,10 @@ const map = new maplibregl.Map({
 let selectedPoint = null;
 
 // ======================
-// LOAD ALL LAYERS
+// LOAD LAYERS
 // ======================
 function loadLayers() {
 
-  // ADMIN
   map.addSource('admin', {
     type: 'geojson',
     data: 'data/administrasi.geojson'
@@ -32,13 +36,9 @@ function loadLayers() {
     id: 'admin-layer',
     type: 'line',
     source: 'admin',
-    paint: {
-      'line-color': '#3A7D44',
-      'line-width': 2
-    }
+    paint: { 'line-color': '#3A7D44', 'line-width': 2 }
   });
 
-  // ROAD
   map.addSource('road', {
     type: 'geojson',
     data: 'data/jalan.geojson'
@@ -48,13 +48,9 @@ function loadLayers() {
     id: 'road-layer',
     type: 'line',
     source: 'road',
-    paint: {
-      'line-color': '#181D27',
-      'line-width': 1
-    }
+    paint: { 'line-color': '#181D27', 'line-width': 1 }
   });
 
-  // SUPERMARKET
   map.addSource('demand', {
     type: 'geojson',
     data: 'data/demand.geojson'
@@ -64,13 +60,9 @@ function loadLayers() {
     id: 'demand-layer',
     type: 'circle',
     source: 'demand',
-    paint: {
-      'circle-radius': 6,
-      'circle-color': '#69B578'
-    }
+    paint: { 'circle-radius': 6, 'circle-color': '#69B578' }
   });
 
-  // WAREHOUSE
   map.addSource('warehouse', {
     type: 'geojson',
     data: 'data/warehouse.geojson'
@@ -80,10 +72,7 @@ function loadLayers() {
     id: 'warehouse-layer',
     type: 'circle',
     source: 'warehouse',
-    paint: {
-      'circle-radius': 7,
-      'circle-color': '#D0DB97'
-    }
+    paint: { 'circle-radius': 7, 'circle-color': '#D0DB97' }
   });
 
   setupToggle();
@@ -91,7 +80,7 @@ function loadLayers() {
 }
 
 // ======================
-// TOGGLE LAYER
+// TOGGLE
 // ======================
 function setupToggle() {
 
@@ -110,9 +99,11 @@ function setupToggle() {
 }
 
 // ======================
-// POPUP + SELECT POINT
+// POPUP
 // ======================
 function setupPopup() {
+
+  map.getCanvas().style.cursor = 'pointer';
 
   map.on('click', 'demand-layer', (e) => {
     const f = e.features[0];
@@ -120,11 +111,7 @@ function setupPopup() {
 
     new maplibregl.Popup()
       .setLngLat(selectedPoint)
-      .setHTML(`
-        <b>Supermarket</b><br>
-        ${f.properties.name || '-'}<br>
-        <button onclick="runBuffer()">Buffer</button>
-      `)
+      .setHTML(`<b>Supermarket</b><br>${f.properties.name || '-'}`)
       .addTo(map);
   });
 
@@ -134,11 +121,7 @@ function setupPopup() {
 
     new maplibregl.Popup()
       .setLngLat(selectedPoint)
-      .setHTML(`
-        <b>Warehouse</b><br>
-        ${f.properties.name || '-'}<br>
-        <button onclick="runBuffer()">Buffer</button>
-      `)
+      .setHTML(`<b>Warehouse</b><br>${f.properties.name || '-'}`)
       .addTo(map);
   });
 }
@@ -148,26 +131,16 @@ function setupPopup() {
 // ======================
 function runBuffer() {
 
-  if (!selectedPoint) {
-    alert("Klik titik dulu!");
-    return;
-  }
+  if (!selectedPoint) return alert("Klik titik dulu!");
 
   const radius = parseFloat(document.getElementById("bufferRadius").value);
 
-  const buffer = turf.buffer(
-    turf.point(selectedPoint),
-    radius,
-    { units: 'kilometers' }
-  );
+  const buffer = turf.buffer(turf.point(selectedPoint), radius, { units: 'kilometers' });
 
   if (map.getSource('buffer')) {
     map.getSource('buffer').setData(buffer);
   } else {
-    map.addSource('buffer', {
-      type: 'geojson',
-      data: buffer
-    });
+    map.addSource('buffer', { type: 'geojson', data: buffer });
 
     map.addLayer({
       id: 'buffer-layer',
@@ -181,21 +154,67 @@ function runBuffer() {
   }
 }
 
-// ======================
-// CLEAR BUFFER
-// ======================
 function clearBuffer() {
   if (map.getLayer('buffer-layer')) map.removeLayer('buffer-layer');
   if (map.getSource('buffer')) map.removeSource('buffer');
 }
 
 // ======================
-// LOAD FIRST
+// ISOCHRONE
+// ======================
+function runIsochrone() {
+
+  if (!selectedPoint) return alert("Klik titik dulu!");
+
+  const minutes = parseInt(document.getElementById("isoTime").value);
+  const mode = document.getElementById("isoMode").value;
+
+  fetch(`https://api.openrouteservice.org/v2/isochrones/${mode}`, {
+    method: "POST",
+    headers: {
+      "Authorization": API_KEY,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      locations: [selectedPoint],
+      range: [minutes * 60]
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+
+    if (map.getSource('isochrone')) {
+      map.getSource('isochrone').setData(data);
+    } else {
+      map.addSource('isochrone', { type: 'geojson', data });
+
+      map.addLayer({
+        id: 'isochrone-layer',
+        type: 'fill',
+        source: 'isochrone',
+        paint: {
+          'fill-color': '#3A7D44',
+          'fill-opacity': 0.4
+        }
+      });
+    }
+
+  })
+  .catch(() => alert("Isochrone error"));
+}
+
+function clearIsochrone() {
+  if (map.getLayer('isochrone-layer')) map.removeLayer('isochrone-layer');
+  if (map.getSource('isochrone')) map.removeSource('isochrone');
+}
+
+// ======================
+// INIT
 // ======================
 map.on('load', loadLayers);
 
 // ======================
-// BASEMAP SWITCH (IMPORTANT FIX)
+// BASEMAP SWITCH
 // ======================
 document.getElementById("basemap").onchange = function () {
 
@@ -206,7 +225,5 @@ document.getElementById("basemap").onchange = function () {
 
   map.setStyle(style);
 
-  map.once('style.load', () => {
-    loadLayers(); // WAJIB reload layer
-  });
+  map.once('style.load', loadLayers);
 };
