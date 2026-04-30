@@ -16,7 +16,7 @@ const map = new maplibregl.Map({
 });
 
 // ======================
-// FUNCTION LOAD LAYERS
+// LOAD LAYERS FUNCTION
 // ======================
 function loadLayers() {
 
@@ -34,7 +34,7 @@ function loadLayers() {
       type: 'line',
       source: 'admin',
       paint: {
-        'line-color': '#0f0ff1',
+        'line-color': '#3A7D44',
         'line-width': 2
       }
     });
@@ -54,14 +54,14 @@ function loadLayers() {
       type: 'line',
       source: 'road',
       paint: {
-        'line-color': '#3e3e3f',
+        'line-color': '#181D27',
         'line-width': 1
       }
     });
   }
 
   // ======================
-  // DEMAND (SUPERMARKET)
+  // SUPERMARKET (DEMAND)
   // ======================
   if (!map.getSource('demand')) {
     map.addSource('demand', {
@@ -74,9 +74,9 @@ function loadLayers() {
       type: 'circle',
       source: 'demand',
       paint: {
-        'circle-radius': 5,
-        'circle-color': '#0b4909',
-        'circle-opacity': 0.8
+        'circle-radius': 6,
+        'circle-color': '#69B578',
+        'circle-opacity': 0.9
       }
     });
   }
@@ -96,10 +96,60 @@ function loadLayers() {
       source: 'warehouse',
       paint: {
         'circle-radius': 7,
-        'circle-color': '#ff0000'
+        'circle-color': '#D0DB97',
+        'circle-stroke-color': '#181D27',
+        'circle-stroke-width': 1
       }
     });
   }
+
+  // ======================
+  // APPLY VISIBILITY
+  // ======================
+  applyInitialVisibility();
+}
+
+// ======================
+// SYNC CHECKBOX VISIBILITY
+// ======================
+function applyInitialVisibility() {
+  const layers = [
+    { id: 'admin-layer', checkbox: 'admin' },
+    { id: 'road-layer', checkbox: 'road' },
+    { id: 'demand-layer', checkbox: 'demand' },
+    { id: 'warehouse-layer', checkbox: 'warehouse' }
+  ];
+
+  layers.forEach(l => {
+    if (!map.getLayer(l.id)) return;
+
+    const el = document.getElementById(l.checkbox);
+    const visibility = el.checked ? 'visible' : 'none';
+
+    map.setLayoutProperty(l.id, 'visibility', visibility);
+  });
+}
+
+// ======================
+// TOGGLE FUNCTION
+// ======================
+function setupLayerToggle() {
+
+  function toggle(layerId, checkboxId) {
+    const el = document.getElementById(checkboxId);
+
+    el.addEventListener('change', function () {
+      if (!map.getLayer(layerId)) return;
+
+      const visibility = this.checked ? 'visible' : 'none';
+      map.setLayoutProperty(layerId, 'visibility', visibility);
+    });
+  }
+
+  toggle('admin-layer', 'admin');
+  toggle('road-layer', 'road');
+  toggle('demand-layer', 'demand');
+  toggle('warehouse-layer', 'warehouse');
 }
 
 // ======================
@@ -107,10 +157,11 @@ function loadLayers() {
 // ======================
 map.on('load', () => {
   loadLayers();
+  setupLayerToggle();
 });
 
 // ======================
-// BASEMAP SWITCH (FIX)
+// BASEMAP SWITCH
 // ======================
 document.getElementById("basemap").onchange = function () {
 
@@ -126,7 +177,7 @@ document.getElementById("basemap").onchange = function () {
 
   map.setStyle(style);
 
-  // reload layer setelah style berubah
+  // reload layers setelah style berubah
   map.once('styledata', () => {
     loadLayers();
   });
