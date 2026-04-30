@@ -22,6 +22,7 @@ let selectedPoint = null;
 // ======================
 function loadLayers() {
 
+  // ADMIN
   map.addSource('admin', {
     type: 'geojson',
     data: 'data/administrasi.geojson'
@@ -37,6 +38,7 @@ function loadLayers() {
     }
   });
 
+  // ROAD
   map.addSource('road', {
     type: 'geojson',
     data: 'data/jalan.geojson'
@@ -52,6 +54,7 @@ function loadLayers() {
     }
   });
 
+  // SUPERMARKET
   map.addSource('demand', {
     type: 'geojson',
     data: 'data/demand.geojson'
@@ -67,6 +70,7 @@ function loadLayers() {
     }
   });
 
+  // WAREHOUSE
   map.addSource('warehouse', {
     type: 'geojson',
     data: 'data/warehouse.geojson'
@@ -87,29 +91,26 @@ function loadLayers() {
 }
 
 // ======================
-// TOGGLE
+// TOGGLE LAYER
 // ======================
 function setupToggle() {
 
-  document.getElementById("admin").onchange = e => {
-    map.setLayoutProperty('admin-layer','visibility', e.target.checked ? 'visible':'none');
+  const toggle = (layer, id) => {
+    document.getElementById(id).onchange = e => {
+      if (map.getLayer(layer)) {
+        map.setLayoutProperty(layer, 'visibility', e.target.checked ? 'visible' : 'none');
+      }
+    };
   };
 
-  document.getElementById("road").onchange = e => {
-    map.setLayoutProperty('road-layer','visibility', e.target.checked ? 'visible':'none');
-  };
-
-  document.getElementById("demand").onchange = e => {
-    map.setLayoutProperty('demand-layer','visibility', e.target.checked ? 'visible':'none');
-  };
-
-  document.getElementById("warehouse").onchange = e => {
-    map.setLayoutProperty('warehouse-layer','visibility', e.target.checked ? 'visible':'none');
-  };
+  toggle('admin-layer', 'admin');
+  toggle('road-layer', 'road');
+  toggle('demand-layer', 'demand');
+  toggle('warehouse-layer', 'warehouse');
 }
 
 // ======================
-// POPUP
+// POPUP + SELECT POINT
 // ======================
 function setupPopup() {
 
@@ -119,7 +120,11 @@ function setupPopup() {
 
     new maplibregl.Popup()
       .setLngLat(selectedPoint)
-      .setHTML(`<b>Supermarket</b><br>${f.properties.name || '-'}`)
+      .setHTML(`
+        <b>Supermarket</b><br>
+        ${f.properties.name || '-'}<br>
+        <button onclick="runBuffer()">Buffer</button>
+      `)
       .addTo(map);
   });
 
@@ -129,7 +134,11 @@ function setupPopup() {
 
     new maplibregl.Popup()
       .setLngLat(selectedPoint)
-      .setHTML(`<b>Warehouse</b><br>${f.properties.name || '-'}`)
+      .setHTML(`
+        <b>Warehouse</b><br>
+        ${f.properties.name || '-'}<br>
+        <button onclick="runBuffer()">Buffer</button>
+      `)
       .addTo(map);
   });
 }
@@ -144,9 +153,11 @@ function runBuffer() {
     return;
   }
 
+  const radius = parseFloat(document.getElementById("bufferRadius").value);
+
   const buffer = turf.buffer(
     turf.point(selectedPoint),
-    3,
+    radius,
     { units: 'kilometers' }
   );
 
@@ -171,18 +182,24 @@ function runBuffer() {
 }
 
 // ======================
-// LOAD FIRST
+// CLEAR BUFFER
 // ======================
-map.on('load', () => {
-  loadLayers();
-});
+function clearBuffer() {
+  if (map.getLayer('buffer-layer')) map.removeLayer('buffer-layer');
+  if (map.getSource('buffer')) map.removeSource('buffer');
+}
 
 // ======================
-// BASEMAP SWITCH (FIXED)
+// LOAD FIRST
+// ======================
+map.on('load', loadLayers);
+
+// ======================
+// BASEMAP SWITCH (IMPORTANT FIX)
 // ======================
 document.getElementById("basemap").onchange = function () {
 
-  let style =
+  const style =
     this.value === "street" ? basemapStreet :
     this.value === "dark" ? basemapDark :
     basemapSatellite;
@@ -190,6 +207,6 @@ document.getElementById("basemap").onchange = function () {
   map.setStyle(style);
 
   map.once('style.load', () => {
-    loadLayers(); // WAJIB
+    loadLayers(); // WAJIB reload layer
   });
 };
