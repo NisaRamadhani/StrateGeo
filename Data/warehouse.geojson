@@ -1,0 +1,21 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Warehouse Barat" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [106.75, -6.2]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Warehouse Timur" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [106.9, -6.2]
+      }
+    }
+  ]
+}
