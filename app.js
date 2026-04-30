@@ -15,170 +15,181 @@ const map = new maplibregl.Map({
   zoom: 11
 });
 
+let selectedPoint = null;
+
 // ======================
-// LOAD LAYERS FUNCTION
+// LOAD ALL LAYERS
 // ======================
 function loadLayers() {
 
-  // ======================
-  // ADMINISTRASI
-  // ======================
-  if (!map.getSource('admin')) {
-    map.addSource('admin', {
-      type: 'geojson',
-      data: 'data/administrasi.geojson'
-    });
+  map.addSource('admin', {
+    type: 'geojson',
+    data: 'data/administrasi.geojson'
+  });
 
-    map.addLayer({
-      id: 'admin-layer',
-      type: 'line',
-      source: 'admin',
-      paint: {
-        'line-color': '#3A7D44',
-        'line-width': 2
-      }
-    });
-  }
+  map.addLayer({
+    id: 'admin-layer',
+    type: 'line',
+    source: 'admin',
+    paint: {
+      'line-color': '#3A7D44',
+      'line-width': 2
+    }
+  });
 
-  // ======================
-  // JALAN
-  // ======================
-  if (!map.getSource('road')) {
-    map.addSource('road', {
-      type: 'geojson',
-      data: 'data/jalan.geojson'
-    });
+  map.addSource('road', {
+    type: 'geojson',
+    data: 'data/jalan.geojson'
+  });
 
-    map.addLayer({
-      id: 'road-layer',
-      type: 'line',
-      source: 'road',
-      paint: {
-        'line-color': '#181D27',
-        'line-width': 1
-      }
-    });
-  }
+  map.addLayer({
+    id: 'road-layer',
+    type: 'line',
+    source: 'road',
+    paint: {
+      'line-color': '#181D27',
+      'line-width': 1
+    }
+  });
 
-  // ======================
-  // SUPERMARKET (DEMAND)
-  // ======================
-  if (!map.getSource('demand')) {
-    map.addSource('demand', {
-      type: 'geojson',
-      data: 'data/demand.geojson'
-    });
+  map.addSource('demand', {
+    type: 'geojson',
+    data: 'data/demand.geojson'
+  });
 
-    map.addLayer({
-      id: 'demand-layer',
-      type: 'circle',
-      source: 'demand',
-      paint: {
-        'circle-radius': 6,
-        'circle-color': '#69B578',
-        'circle-opacity': 0.9
-      }
-    });
-  }
+  map.addLayer({
+    id: 'demand-layer',
+    type: 'circle',
+    source: 'demand',
+    paint: {
+      'circle-radius': 6,
+      'circle-color': '#69B578'
+    }
+  });
 
-  // ======================
-  // WAREHOUSE
-  // ======================
-  if (!map.getSource('warehouse')) {
-    map.addSource('warehouse', {
-      type: 'geojson',
-      data: 'data/warehouse.geojson'
-    });
+  map.addSource('warehouse', {
+    type: 'geojson',
+    data: 'data/warehouse.geojson'
+  });
 
-    map.addLayer({
-      id: 'warehouse-layer',
-      type: 'circle',
-      source: 'warehouse',
-      paint: {
-        'circle-radius': 7,
-        'circle-color': '#D0DB97',
-        'circle-stroke-color': '#181D27',
-        'circle-stroke-width': 1
-      }
-    });
-  }
+  map.addLayer({
+    id: 'warehouse-layer',
+    type: 'circle',
+    source: 'warehouse',
+    paint: {
+      'circle-radius': 7,
+      'circle-color': '#D0DB97'
+    }
+  });
 
-  // ======================
-  // APPLY VISIBILITY
-  // ======================
-  applyInitialVisibility();
+  setupToggle();
+  setupPopup();
 }
 
 // ======================
-// SYNC CHECKBOX VISIBILITY
+// TOGGLE
 // ======================
-function applyInitialVisibility() {
-  const layers = [
-    { id: 'admin-layer', checkbox: 'admin' },
-    { id: 'road-layer', checkbox: 'road' },
-    { id: 'demand-layer', checkbox: 'demand' },
-    { id: 'warehouse-layer', checkbox: 'warehouse' }
-  ];
+function setupToggle() {
 
-  layers.forEach(l => {
-    if (!map.getLayer(l.id)) return;
+  document.getElementById("admin").onchange = e => {
+    map.setLayoutProperty('admin-layer','visibility', e.target.checked ? 'visible':'none');
+  };
 
-    const el = document.getElementById(l.checkbox);
-    const visibility = el.checked ? 'visible' : 'none';
+  document.getElementById("road").onchange = e => {
+    map.setLayoutProperty('road-layer','visibility', e.target.checked ? 'visible':'none');
+  };
 
-    map.setLayoutProperty(l.id, 'visibility', visibility);
+  document.getElementById("demand").onchange = e => {
+    map.setLayoutProperty('demand-layer','visibility', e.target.checked ? 'visible':'none');
+  };
+
+  document.getElementById("warehouse").onchange = e => {
+    map.setLayoutProperty('warehouse-layer','visibility', e.target.checked ? 'visible':'none');
+  };
+}
+
+// ======================
+// POPUP
+// ======================
+function setupPopup() {
+
+  map.on('click', 'demand-layer', (e) => {
+    const f = e.features[0];
+    selectedPoint = f.geometry.coordinates;
+
+    new maplibregl.Popup()
+      .setLngLat(selectedPoint)
+      .setHTML(`<b>Supermarket</b><br>${f.properties.name || '-'}`)
+      .addTo(map);
+  });
+
+  map.on('click', 'warehouse-layer', (e) => {
+    const f = e.features[0];
+    selectedPoint = f.geometry.coordinates;
+
+    new maplibregl.Popup()
+      .setLngLat(selectedPoint)
+      .setHTML(`<b>Warehouse</b><br>${f.properties.name || '-'}`)
+      .addTo(map);
   });
 }
 
 // ======================
-// TOGGLE FUNCTION
+// BUFFER
 // ======================
-function setupLayerToggle() {
+function runBuffer() {
 
-  function toggle(layerId, checkboxId) {
-    const el = document.getElementById(checkboxId);
-
-    el.addEventListener('change', function () {
-      if (!map.getLayer(layerId)) return;
-
-      const visibility = this.checked ? 'visible' : 'none';
-      map.setLayoutProperty(layerId, 'visibility', visibility);
-    });
+  if (!selectedPoint) {
+    alert("Klik titik dulu!");
+    return;
   }
 
-  toggle('admin-layer', 'admin');
-  toggle('road-layer', 'road');
-  toggle('demand-layer', 'demand');
-  toggle('warehouse-layer', 'warehouse');
+  const buffer = turf.buffer(
+    turf.point(selectedPoint),
+    3,
+    { units: 'kilometers' }
+  );
+
+  if (map.getSource('buffer')) {
+    map.getSource('buffer').setData(buffer);
+  } else {
+    map.addSource('buffer', {
+      type: 'geojson',
+      data: buffer
+    });
+
+    map.addLayer({
+      id: 'buffer-layer',
+      type: 'fill',
+      source: 'buffer',
+      paint: {
+        'fill-color': '#69B578',
+        'fill-opacity': 0.3
+      }
+    });
+  }
 }
 
 // ======================
-// LOAD AWAL
+// LOAD FIRST
 // ======================
 map.on('load', () => {
   loadLayers();
-  setupLayerToggle();
 });
 
 // ======================
-// BASEMAP SWITCH
+// BASEMAP SWITCH (FIXED)
 // ======================
 document.getElementById("basemap").onchange = function () {
 
-  let style;
-
-  if (this.value === "street") {
-    style = basemapStreet;
-  } else if (this.value === "dark") {
-    style = basemapDark;
-  } else {
-    style = basemapSatellite;
-  }
+  let style =
+    this.value === "street" ? basemapStreet :
+    this.value === "dark" ? basemapDark :
+    basemapSatellite;
 
   map.setStyle(style);
 
-  // reload layers setelah style berubah
-  map.once('styledata', () => {
-    loadLayers();
+  map.once('style.load', () => {
+    loadLayers(); // WAJIB
   });
 };
