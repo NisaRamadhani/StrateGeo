@@ -13,7 +13,6 @@
       font-family: 'Segoe UI', sans-serif;
     }
 
-    /* SIDEBAR */
     #sidebar {
       position: absolute;
       width: 280px;
@@ -26,7 +25,6 @@
       z-index: 10;
     }
 
-    /* MAP */
     #map {
       position: absolute;
       left: 280px;
@@ -47,7 +45,6 @@
       text-transform: uppercase;
     }
 
-    /* CARD */
     .card {
       background: rgba(255,255,255,0.05);
       padding: 14px;
@@ -55,10 +52,8 @@
       margin-bottom: 15px;
     }
 
-    /* LAYER ITEM */
     .layer-item {
       display: flex;
-      justify-content: space-between;
       align-items: center;
       padding: 6px 4px;
     }
@@ -76,7 +71,6 @@
       accent-color: #69B578;
     }
 
-    /* INPUT */
     select, input {
       width: 100%;
       padding: 8px;
@@ -88,7 +82,6 @@
       color: white;
     }
 
-    /* BUTTON */
     button {
       width: 100%;
       padding: 10px;
@@ -137,31 +130,19 @@
   <div class="card">
 
     <div class="layer-item">
-      <label>
-        <input type="checkbox" id="admin" checked>
-        Batas Administrasi
-      </label>
+      <label><input type="checkbox" id="admin" checked> Batas Administrasi</label>
     </div>
 
     <div class="layer-item">
-      <label>
-        <input type="checkbox" id="road" checked>
-        Jalan
-      </label>
+      <label><input type="checkbox" id="road" checked> Jalan</label>
     </div>
 
     <div class="layer-item">
-      <label>
-        <input type="checkbox" id="demand" checked>
-        Supermarket
-      </label>
+      <label><input type="checkbox" id="demand" checked> Supermarket</label>
     </div>
 
     <div class="layer-item">
-      <label>
-        <input type="checkbox" id="warehouse" checked>
-        Warehouse
-      </label>
+      <label><input type="checkbox" id="warehouse" checked> Warehouse</label>
     </div>
 
   </div>
@@ -171,7 +152,6 @@
   <div class="card">
     <label>Radius (km)</label>
     <input type="number" id="bufferRadius" value="3">
-
     <button class="btn-primary" onclick="runBuffer()">Run Buffer</button>
     <button class="btn-secondary" onclick="clearBuffer()">Clear</button>
   </div>
@@ -179,7 +159,6 @@
   <!-- ISOCHRONE -->
   <h3>Isochrone</h3>
   <div class="card">
-
     <label>Travel Time (minutes)</label>
     <input type="number" id="isoTime" value="10">
 
@@ -193,7 +172,15 @@
 
     <button class="btn-primary" onclick="runIsochrone()">Run Isochrone</button>
     <button class="btn-secondary" onclick="clearIsochrone()">Clear</button>
+  </div>
 
+  <!-- COVERAGE -->
+  <h3>Coverage Analysis</h3>
+  <div class="card">
+    <label>Coverage Radius (km)</label>
+    <input type="number" id="coverageRadius" value="3">
+    <button class="btn-primary" onclick="runCoverage()">Show Coverage</button>
+    <button class="btn-secondary" onclick="clearCoverage()">Clear</button>
   </div>
 
 </div>
